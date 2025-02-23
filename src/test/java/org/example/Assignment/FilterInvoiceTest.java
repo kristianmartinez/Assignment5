@@ -57,4 +57,19 @@ public class FilterInvoiceTest {
         assertTrue("All invoices should have a value less than 100",
                 filtered.stream().allMatch(invoice -> invoice.getValue() < 100));
     }
+
+    @Test
+    public void testWhenLowInvoicesSent() {
+        SAP_BasedInvoiceSender sap = new SAP_BasedInvoiceSender(filterInvoice, null);
+
+    }
+
+    @Test
+    public void testWhenNoInvoices() {
+
+    }
+
+
+
+
 }
