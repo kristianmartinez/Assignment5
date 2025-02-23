@@ -58,16 +58,6 @@ public class FilterInvoiceTest {
                 filtered.stream().allMatch(invoice -> invoice.getValue() < 100));
     }
 
-    @Test
-    public void testWhenLowInvoicesSent() {
-        SAP_BasedInvoiceSender sap = new SAP_BasedInvoiceSender(filterInvoice, null);
-
-    }
-
-    @Test
-    public void testWhenNoInvoices() {
-
-    }
 
 
 

@@ -1,5 +1,6 @@
 package org.example.Assignment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // Class responsible for sending low-valued invoices to the SAP system
@@ -15,10 +16,18 @@ public class SAP_BasedInvoiceSender {
     }
 
     // Method to send all low-valued invoices to the SAP system
-    public void sendLowValuedInvoices() {
+    public List<Invoice> sendLowValuedInvoices() {
         List<Invoice> lowValuedInvoices = filter.lowValueInvoices();
+        List<Invoice> failedValueInvoices = new ArrayList<>(); // Store failed invoices
+
         for (Invoice invoice : lowValuedInvoices) {  // Iterates through each invoice in the list
-            sap.send(invoice);  // Sends the current invoice to the SAP system
+            try {
+                sap.send(invoice);  // Sends the current invoice to the SAP system
+            } catch (FailToSendSAPInvoiceException exception) {
+                failedValueInvoices.add(invoice);
+                System.out.println("SAP invoice failed");
+            }
         }
+        return failedValueInvoices;
     }
 }
